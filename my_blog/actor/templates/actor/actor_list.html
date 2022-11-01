@@ -1,0 +1,42 @@
+{% extends "home/index.html" %}
+{% load static %}
+
+{% block my_blog_header %}
+<header class="masthead" style="background-image: url('assets/img/post-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Lista de Actores</h1>
+                    <span class="subheading">My blog</span>
+                </div>
+            </div>
+        </div>
+        <a class="button_custom" href="{% url 'actor:actor-add' %}">Crear nuevo actor</a>
+    </div>
+</header>
+{% endblock %}
+
+{% block my_blog_content %}
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <!-- Post preview-->
+            
+            {% for actor in actors %}
+                <!-- Post preview-->
+                <div class="post-preview">
+                        <h2 class="post-title">{{ actor.name }} {{ actor.last_name }}</h2>
+                        <h3 class="post-subtitle">Tiene  {{ actor.awards }} premios </h3>
+                        
+
+                </div>        
+                <!-- Divider-->
+                <hr class="my-4" />
+            {% endfor %}
+            {% endblock %}    
+        </div>
+    </div>
+</div>
+

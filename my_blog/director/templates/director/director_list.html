@@ -1,0 +1,45 @@
+{% extends "home/index.html" %}
+{% load static %}
+{% block my_blog_header %}
+<header class="masthead" style="background-image: url('assets/img/about-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Lista de Directores</h1>
+                    <span class="subheading">My blog</span>
+                </div>
+            </div>
+        </div>
+        <a class="button_custom" href="{% url 'director:director-add' %}">Crear nuevo director</a>
+    </div>
+</header>
+{% endblock %}
+
+{% block my_blog_content %}
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <!-- Post preview-->
+            
+            {% for director in directors %}
+                <!-- Post preview-->
+                <div class="post-preview">
+                        <h2 class="post-title">{{ director.name }} {{ director.last_name }}</h2>
+                        <h3 class="post-subtitle">Produjo  {{ director.movies }} peliculas </h3>
+                        <h4 class="post-subtitle">Fecha de nacimiento: {{ director.birth }}</h4>
+                        
+
+                        
+
+                </div>        
+                <!-- Divider-->
+                <hr class="my-4" />
+            {% endfor %}
+    
+        </div>
+    </div>
+</div>
+
+{% endblock %}
