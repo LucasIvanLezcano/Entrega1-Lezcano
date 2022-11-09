@@ -7,8 +7,8 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading">
-                    <h1>Lista de Peliculas</h1>
-                    <span class="subheading">My blog</span>
+                    <h1>Movie-Data</h1>
+                    <span class="subheading">Lista de Peliculas</span>
                 </div>
             </div>
         </div>
@@ -24,21 +24,63 @@
         <div class="col-md-10 col-lg-8 col-xl-7">
             <!-- Post preview-->
             
-            {% for movie in movies %}
+            {% for movie in movie_list %}
                 <!-- Post preview-->
                 <div class="post-preview">
+                    <a href="{% url 'movie:movie-detail' movie.id %}">
                         <h2 class="post-title">{{ movie.name }}</h2>
-                        <h3 class="post-subtitle">Fecha de estreno {{ movie.release_date }}</h3>
-                        <h4 class="post-subtitle">Producida por :  {{ movie.produced_by}}</h4>
-                        
-
                 </div>        
                 <!-- Divider-->
                 <hr class="my-4" />
             {% endfor %}
-            {% endblock %}
-    
-        </div>
+<!--Pagination-->
+<div class="container p-4">
+    <div class="pagination justify-content-center">
+        <span class="step-links">
+            {% if movie_list.has_previous %}
+                <a href="?page=1">&laquo; first</a> |
+                <a href="?page={{ movie_list.previous_page_number }}">previous</a> |
+            {% endif %}
+
+            {% if movie_list.paginator.num_pages > 1 %}
+            <span class="current">
+                Page {{ movie_list.number }} of {{ movie_list.paginator.num_pages }} |
+            </span>
+            {% endif %}
+
+            {% if movie_list.has_next %}
+                <a href="?page={{ movie_list.next_page_number }}">next</a> |
+                <a href="?page={{ movie_list.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
     </div>
 </div>
+<!--end of Pagination-->
 
+<!--Pagination Class Based Views-->
+{% if is_paginated %}
+<div class="container p-4">
+    <div class="pagination justify-content-center">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a> |
+                <a href="?page={{ movie_list.previous_page_number }}">previous</a> |
+            {% endif %}
+
+            {% if page_obj.paginator.num_pages > 1 %}
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} |
+            </span>
+            {% endif %}
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a> |
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% endif %}
+<!--end of Pagination-->
+
+{% endblock %}

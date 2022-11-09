@@ -1,0 +1,34 @@
+{% extends "home/index.html" %}
+{% load static %}
+
+{% block my_blog_title %}
+Movie delete
+{% endblock %}
+
+{% block my_blog_header %}
+<header class="masthead" style="background-image: url('assets/img/post-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1> Data-Movie </h1>
+                    <span class="subheading">Eliminar pelicula</span>
+                </div>
+            </div>
+        </div>
+        <a class="button_custom" href="{% url 'movie:movie-add' %}">Crear nueva pelicula</a>
+    </div>
+</header>
+{% endblock %}
+
+{% block my_blog_content %}
+
+<h1>Estás seguro de eliminar la pelicula: {{ movie.name }}?</h1>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <input class="btn btn-danger" type="submit" value="Si, eliminar.">
+    <a class="btn btn-primary" href="{% url 'movie:movie-list' %}" >Cancelar</a>
+</form>
+
+{% endblock %}

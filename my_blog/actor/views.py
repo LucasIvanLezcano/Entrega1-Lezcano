@@ -7,13 +7,9 @@ from actor.models import Actor
 from actor.forms import ActorForm  
 
 def actors(request):
-    actors = Actor.objects.all() 
-
-    context_dict = {"actors": actors}
-
     return render(
         request=request,
-        context=context_dict,
+        context={"actor_list": get_actors(request)},
         template_name="actor/actor_list.html",
     )
 def get_actors(request):

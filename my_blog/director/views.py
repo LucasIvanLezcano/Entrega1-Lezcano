@@ -7,15 +7,12 @@ from director.models import Director
 from director.forms import DirectorForm
 
 def directors(request):
-    directors = Director.objects.all() 
-
-    context_dict = {"directors": directors}
-
     return render(
         request=request,
-        context=context_dict,
+        context={"director_list": get_directors(request)},
         template_name="director/director_list.html",
         ) 
+        
 def get_directors(request):
     directors = Director.objects.all()
     paginator = Paginator(directors, 3)
