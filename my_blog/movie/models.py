@@ -9,9 +9,6 @@ class Movie(models.Model):
     release_date = models.DateField()
     produced_by = models.CharField(max_length=40)
     description = RichTextField(null=True, blank=True)
-    comments = models.ManyToManyField(
-        User, through="Comment", related_name="comments_owned"
-    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
